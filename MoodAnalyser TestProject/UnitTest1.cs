@@ -40,5 +40,19 @@ namespace TestCase
             //Assert
             Assert.AreEqual(expected, actual);
         }
+        [TestMethod]
+        public void GivenMood_WhenNull_ShouldReturn_HAPPY_MOOD()
+        {
+            //Arrange
+            string moodMessage = null;
+            MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
+            string expected = "HAPPY";
+
+            //Act
+            string actual = moodAnalyser.AnalyseMood(moodMessage);
+
+            //Assert
+            Assert.AreEqual(expected, actual);
+        }
     }
 }
