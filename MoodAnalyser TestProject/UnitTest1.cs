@@ -142,5 +142,29 @@ namespace TestCase
                 Assert.AreEqual(expected, ex.Message);
             }
         }
+        //  TC 6.1 Given happy message using reflection when proper should return happy mood.
+        [TestMethod]
+        public void GivenHappyMessage_WhenUsingReflection_ThenShouldReturnHappyMood()
+        {
+            string expected = "Happy";
+            object obj = MoodAnalyserFactory.InvokeAnalyseMood("Happy", "AnalyseMood");
+            Assert.AreEqual(expected, obj);
+        }
+
+        //  TC 6.2 Given happy message when improper method should throw Mood Analysis Exception.
+        [TestMethod]
+        public void GivenHappyMessage_WhenImproperMethod_ShouldThrow_MoodAnalysisException()
+
+        {
+            string expected = "Method is not found";
+            try
+            {
+                object obj = MoodAnalyserFactory.InvokeAnalyseMood("Happy", "WrongAnalyseMood");
+            }
+            catch (MoodAnalyserCustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
     }
 }
