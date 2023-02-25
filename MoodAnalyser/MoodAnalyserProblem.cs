@@ -9,33 +9,47 @@ namespace MoodAnalyser
 {
     public class MoodAnalyserProblem
     {
-        public string AnalyseMood(string moodMessage)
+        //variable
+        public string message;
+
+        // default contructor
+
+        public MoodAnalyserProblem()
         {
-            try
-            {
-                if (moodMessage == null)
-                {
-                    throw new MoodAnalyserCustomException(ExceptionType.NULL_MESSAGE_EXCEPTION, "Null message passed.");
-                }
-                if (moodMessage.Equals(string.Empty))
-                {
-                    throw new MoodAnalyserCustomException(ExceptionType.EMPTY_MESSAGE_EXCEPTION, "Empty message passed.");
-                }
-                if (moodMessage.ToLower().Contains("sad"))
-                {
-                    return "SAD";
-                }
-                else
-                {
-                    return "HAPPY";
-                }
 
-            }
-            catch (Exception ex)
-            {
-                return ex.Message;
-            }
+        }
 
+        public class MoodAnalyzerProblems
+        {
+            //parameterized constructor
+            public string AnalyseMood(string moodMessage)
+            {
+
+                try
+                {
+                    if (moodMessage == null)
+                    {
+                        throw new MoodAnalyserCustomException(ExceptionType.NULL_EXCEPTION, "Null message passed.");
+                    }
+                    if (moodMessage.Equals(string.Empty))
+                    {
+                        throw new MoodAnalyserCustomException(ExceptionType.EMPTY_EXCEPTION, "Empty message passed.");
+                    }
+                    if (moodMessage.ToLower().Contains("sad"))
+                    {
+                        return "SAD";
+                    }
+                    else
+                    {
+                        return "HAPPY";
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    return ex.Message;
+                }
+            }
         }
     }
 }

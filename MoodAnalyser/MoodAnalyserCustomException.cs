@@ -6,20 +6,23 @@ using System.Threading.Tasks;
 
 namespace MoodAnalyser
 {
+    //Inheriting base Exception Class.
     public class MoodAnalyserCustomException : Exception
     {
         //Enum for Exception Type
+        public ExceptionType type;
+        //Enumeration
         public enum ExceptionType
         {
-            NULL_MESSAGE_EXCEPTION, EMPTY_MESSAGE_EXCEPTION
+            NULL_EXCEPTION,
+            EMPTY_EXCEPTION,
+            NO_SUCH_CLASS,
+            NO_SUCH_CONSTRUCTOR
         }
-
-        private readonly ExceptionType exceptionType;
-
-        public MoodAnalyserCustomException(ExceptionType exceptionType, string exceptionMessage) : base(exceptionMessage)
+        //Exception Constructor.
+        public MoodAnalyserCustomException(ExceptionType type, string message) : base(message)
         {
-            this.exceptionType = exceptionType;
+            this.type = type;
         }
-
     }
 }
