@@ -12,7 +12,7 @@ namespace TestCase
         {
             //Arrange
             string moodMessage = "I am in Sad Mood";
-            MoodAnalyzerProblems moodAnalyser = new MoodAnalyzerProblems();
+            MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
             string expected = "SAD";
 
             //Act
@@ -27,7 +27,7 @@ namespace TestCase
         {
             //Arrange
             string moodMessage = "I am in Any Mood";
-            MoodAnalyzerProblems moodAnalyser = new MoodAnalyzerProblems();
+            MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
             string expected = "HAPPY";
 
             //Act
@@ -42,7 +42,7 @@ namespace TestCase
         {
             //Arrange
             string moodMessage = null;
-            MoodAnalyzerProblems moodAnalyser = new MoodAnalyzerProblems();
+            MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
             string expected = "Null message passed.";
 
             //Act
@@ -57,7 +57,7 @@ namespace TestCase
         {
             //Arrange
             string moodMessage = string.Empty;
-            MoodAnalyzerProblems moodAnalyser = new MoodAnalyzerProblems();
+            MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
             string expected = "Empty message passed.";
 
             //Act
@@ -70,7 +70,7 @@ namespace TestCase
         [TestMethod]
         public void GivenMoodAnalyserClassName_ShouldReturns_MoodAnalyserObject()
         {
-            object expected = new MoodAnalyzerProblems();
+            object expected = new MoodAnalyserProblem();
             object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer.MoodAnalyzerProblems", "MoodAnalyzerProblems");
             expected.Equals(obj);
         }
@@ -81,7 +81,7 @@ namespace TestCase
             string expected = "Class Not Found";
             try
             {
-                MoodAnalyzerProblems moodAnalyser = new MoodAnalyzerProblems();
+                MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
                 object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer.MoodAnalyzerProblems", "MoodAnalyzerProblems");
             }
             catch (MoodAnalyserCustomException ex)
@@ -96,8 +96,46 @@ namespace TestCase
             string expected = "Constructor is Not Found";
             try
             {
-                MoodAnalyzerProblems moodAnalyser = new MoodAnalyzerProblems();
+                MoodAnalyserProblem moodAnalyser = new MoodAnalyserProblem();
                 object obj = MoodAnalyserFactory.CreateMoodAnalyser("MoodAnalyzer.MoodAnalyzerProblems", "MoodAnalyzer");
+            }
+            catch (MoodAnalyserCustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+        //TC 5.1 :  Given MoodAnalyser Class Name When Proper Should Returns MoodAnalyser Object
+        [TestMethod]
+        public void GivenMoodAnalyserClassName_WhenProper_ShouldReturns_MoodAnalyserObject()
+        {
+            object expected = new MoodAnalyserProblem("HAPPY");
+            object obj = MoodAnalyserFactory.CreateMoodAnalyserUsingParameterizedConstructor("MoodAnalyser.Mood_Analyser_Problems", "Mood_Analyser_Problems", "HAPPY");
+            expected.Equals(obj);
+        }
+
+        // TC 5.2 : Given Class Name When Improper Should Throw MoodAnalysis Exception.
+        [TestMethod]
+        public void GivenClassName_WhenImproper_ShouldThrow_MoodAnalysisException()
+        {
+            string expected = "Class is Not Found";
+            try
+            {
+                object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyserUsingParameterizedConstructor("MoodAnalyser.Mood_Analyser_Problems", "Mood_Analyser_Problems", "HAPPY");
+            }
+            catch (MoodAnalyserCustomException ex)
+            {
+                Assert.AreEqual(expected, ex.Message);
+            }
+        }
+
+        // TC 5.3 : Given Constructor Name When Improper Should Throw MoodAnalysisException.
+        [TestMethod]
+        public void GivenConstructorName_WhenImproper_Shouldthrow_MoodAnalysisException()
+        {
+            string expected = "Constructor is Not Found";
+            try
+            {
+                object moodAnalyserObject = MoodAnalyserFactory.CreateMoodAnalyserUsingParameterizedConstructor("MoodAnalyser.Mood_Analyser_Problems", "Mood_Analyser_Problems", "HAPPY");
             }
             catch (MoodAnalyserCustomException ex)
             {

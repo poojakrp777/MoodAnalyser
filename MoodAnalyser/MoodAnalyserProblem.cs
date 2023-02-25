@@ -1,54 +1,50 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static MoodAnalyser.MoodAnalyserCustomException;
 
 namespace MoodAnalyser
 {
     public class MoodAnalyserProblem
     {
-        //variable
-        public string message;
-
         // default contructor
-
         public MoodAnalyserProblem()
         {
 
         }
-
-        public class MoodAnalyzerProblems
+        //variable
+        public string moodMessage;
+        //parameterized constructor
+        public MoodAnalyserProblem(string moodMessage)
         {
-            //parameterized constructor
-            public string AnalyseMood(string moodMessage)
+            this.moodMessage = moodMessage;
+        }
+        //Method to return the type of AnalyseMood
+        public string AnalyseMood(string moodMessage)
+        {
+            try
             {
-
-                try
+                if (moodMessage == null)
                 {
-                    if (moodMessage == null)
-                    {
-                        throw new MoodAnalyserCustomException(ExceptionType.NULL_EXCEPTION, "Null message passed.");
-                    }
-                    if (moodMessage.Equals(string.Empty))
-                    {
-                        throw new MoodAnalyserCustomException(ExceptionType.EMPTY_EXCEPTION, "Empty message passed.");
-                    }
-                    if (moodMessage.ToLower().Contains("sad"))
-                    {
-                        return "SAD";
-                    }
-                    else
-                    {
-                        return "HAPPY";
-                    }
-
+                    throw new MoodAnalyserCustomException(ExceptionType.NULL_EXCEPTION, "Null message passed.");
                 }
-                catch (Exception ex)
+                if (moodMessage.Equals(string.Empty))
                 {
-                    return ex.Message;
+                    throw new MoodAnalyserCustomException(ExceptionType.EMPTY_EXCEPTION, "Empty message passed.");
                 }
+                if (moodMessage.ToLower().Contains("sad"))
+                {
+                    return "SAD";
+                }
+                else
+                {
+                    return "HAPPY";
+                }
+
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
             }
         }
     }
